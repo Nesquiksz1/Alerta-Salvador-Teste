@@ -683,6 +683,28 @@
         // Dados das áreas de risco (baseados no Instituto Fogo Cruzado - Período: 01/01/2024 a 29/08/2025)
         // Metodologia IRAS: Alto Risco (>30), Médio Risco (20-30), Baixo Risco (<20)
         const riskAreas = [
+            function calcularIRAS({                
+                tiroteiosRegistrados,                 
+                vitimasFatais,                 
+                pessoasBaleadasNaoFatais,               
+                operacoesPoliciais,                 
+                disputasTerritoriais          
+            }) {            
+                const pesoTiroteios = 3;         
+                const pesoVitimasFatais = 3;       
+                const pesoBaleadasNaoFatais = 2;             
+                const pesoOperacoes = 1;               
+                const pesoDisputas = 2;                 
+                const somaPesos = 11;
+                
+                const iras = (
+                    pesoTiroteios * tiroteiosRegistrados +             
+                    pesoVitimasFatais * vitimasFatais +            
+                    pesoBaleadasNaoFatais * pessoasBaleadasNaoFatais +               
+                    pesoOperacoes * operacoesPoliciais +              
+                    pesoDisputas * disputasTerritoriais ) / somaPesos;
+                return iras;
+            }
             {
                 name: "Lobato",
                 center: [-12.918201, -38.481219],
