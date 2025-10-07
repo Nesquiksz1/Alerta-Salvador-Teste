@@ -593,33 +593,6 @@
             }
         }
         
-        // Função para inicializar áudio após interação do usuário
-        function initializeAudio() {
-            const clickSound = document.getElementById('clickSound');
-            if (clickSound) {
-                clickSound.play().then(() => {
-                    clickSound.pause();
-                    clickSound.currentTime = 0;
-                }).catch(e => {
-                    console.log('Áudio não suportado ou bloqueado');
-                });
-            }
-        }
-        
-        // Adicionar som de clique a todos os elementos clicáveis
-        document.addEventListener('DOMContentLoaded', function() {
-            // Inicializar áudio na primeira interação
-            document.body.addEventListener('click', initializeAudio, { once: true });
-            document.body.addEventListener('touchstart', initializeAudio, { once: true });
-            
-            const specificButtons = document.querySelectorAll("#legendToggle, #infoToggle, #linksToggle");
-            
-            specificButtons.forEach(function(element) {
-                element.addEventListener('click', playClickSound);
-                element.addEventListener('touchstart', playClickSound);
-            });
-        });
-        
         // Atualizar data e hora em tempo real
         function updateDateTime() {
             const now = new Date();
@@ -1014,17 +987,67 @@
                 }
             }
         });
+        // ==================== NOVO CÓDIGO PARA POPUPS E SOM ====================
+        document.addEventListener('DOMContentLoaded', function() {
+            const legendBtn = document.getElementById('legendToggle');
+            const infoBtn = document.getElementById('infoToggle');
+            const linksBtn = document.getElementById('linksToggle');
+            const legend = document.getElementById('legend');
+            const infoPanel = document.getElementById('infoPanel');
+            const linksMenu = document.getElementById('linksMenu');
 
-        // Painéis de info/legenda/links
-        document.getElementById('legendToggle').addEventListener('click', function() {
-            document.getElementById('legend').classList.toggle('active');
-        });
-        document.getElementById('infoToggle').addEventListener('click', function() {
-            document.getElementById('infoPanel').classList.toggle('active');
-        });
-        document.getElementById('linksToggle').addEventListener('click', function() {
-            document.getElementById('linksMenu').classList.toggle('active');
+            function closeAllPopups() {
+                legend.classList.remove('active');
+                infoPanel.classList.remove('active');
+                linksMenu.classList.remove('active');
+            }
+
+            function playClickSound() {
+                const clickSound = document.getElementById('clickSound');
+                if (clickSound) {
+                    clickSound.currentTime = 0;
+                    clickSound.play().catch(() => {});
+                }
+            }
+
+            legendBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closeAllPopups();
+                legend.classList.toggle('active');
+                playClickSound();
+            });
+
+            infoBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closeAllPopups();
+                infoPanel.classList.toggle('active');
+                playClickSound();
+            });
+
+            linksBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closeAllPopups();
+                linksMenu.classList.toggle('active');
+                playClickSound();
+            });
+
+            document.body.addEventListener('click', function(e) {
+                if (
+                    !legend.contains(e.target) && e.target !== legendBtn &&
+                    !infoPanel.contains(e.target) && e.target !== infoBtn &&
+                    !linksMenu.contains(e.target) && e.target !== linksBtn
+                ) {
+                    closeAllPopups();
+                }
+            });
+
+            document.body.addEventListener('click', function initAudio() {
+                playClickSound();
+                document.body.removeEventListener('click', initAudio);
+            }, { once: true });
         });
     </script>
 </body>
 </html>
+
+       
