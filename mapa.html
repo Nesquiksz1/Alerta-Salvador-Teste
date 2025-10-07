@@ -592,6 +592,32 @@
                 console.log('Erro ao reproduzir som:', error);
             }
         }
+        // Função para inicializar áudio após interação do usuário
+        function initializeAudio() {
+            const clickSound = document.getElementById('clickSound');
+            if (clickSound) {
+                clickSound.play().then(() => {
+                    clickSound.pause();
+                    clickSound.currentTime = 0;
+                }).catch(e => {
+                    console.log('Áudio não suportado ou bloqueado');
+                });
+            }
+        }
+        
+        // Adicionar som de clique a todos os elementos clicáveis
+        document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar áudio na primeira interação
+            document.body.addEventListener('click', initializeAudio, { once: true });
+            document.body.addEventListener('touchstart', initializeAudio, { once: true });
+            
+            const specificButtons = document.querySelectorAll("#legendToggle, #infoToggle, #linksToggle");
+            
+            specificButtons.forEach(function(element) {
+                element.addEventListener('click', playClickSound);
+                element.addEventListener('touchstart', playClickSound);
+            });
+        });
         
         // Atualizar data e hora em tempo real
         function updateDateTime() {
@@ -987,7 +1013,19 @@
                 }
             }
         });
-        // ==================== NOVO CÓDIGO PARA POPUPS E SOM ====================
+        
+        // Painéis de info/legenda/links
+        document.getElementById('legendToggle').addEventListener('click', function() {
+            document.getElementById('legend').classList.toggle('active');
+        });
+        document.getElementById('infoToggle').addEventListener('click', function() {
+            document.getElementById('infoPanel').classList.toggle('active');
+        });
+        document.getElementById('linksToggle').addEventListener('click', function() {
+            document.getElementById('linksMenu').classList.toggle('active');
+        });
+        
+        //==================== NOVO CÓDIGO PARA POPUPS E SOM ====================
         document.addEventListener('DOMContentLoaded', function() {
             const legendBtn = document.getElementById('legendToggle');
             const infoBtn = document.getElementById('infoToggle');
