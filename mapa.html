@@ -1039,6 +1039,12 @@
             const infoPanel = document.getElementById('infoPanel');
             const linksMenu = document.getElementById('linksMenu');
 
+            function closeAllPopups() {
+                legend.classList.remove('active');
+                infoPanel.classList.remove('active');
+                linksMenu.classList.remove('active');
+            }
+            
             legendBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 if (legend.classList.contains('active')) {
@@ -1071,28 +1077,8 @@
                 }
                 playClickSound();
             });
-            
-           // function closeAllPopups() {
-               // legend.classList.remove('active');
-               // infoPanel.classList.remove('active');
-               // linksMenu.classList.remove('active');
-            //}
-        });
-            
-            function playClickSound() {
-                const clickSound = document.getElementById('clickSound');
-                if (clickSound) {
-                    clickSound.currentTime = 0;
-                    clickSound.play().catch(() => {});
-                }
-            }
         
-            legendBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                if (legend.classList.contains('active')) {        
-                    legend.classList.remove('active');
-                } else {
-            document.body.addEventListener('click', function(e) {
+        document.body.addEventListener('click', function(e) {
                 if (
                     !legend.contains(e.target) && e.target !== legendBtn &&
                     !infoPanel.contains(e.target) && e.target !== infoBtn &&
@@ -1101,11 +1087,31 @@
                     closeAllPopups();
                 }
             });
-            document.body.addEventListener('click', function initAudio() {
-                playClickSound();
-                document.body.removeEventListener('click', initAudio);
-            }, { once: true });
-        }});
+            // Adicionar som de clique aos botões
+            [legendBtn, infoBtn, linksBtn].forEach(function(element) {
+                element.addEventListener('touchstart', playClickSound);
+            });
+        });
+        
+        function playClickSound() {
+            const clickSound = document.getElementById('clickSound');
+            if (clickSound) {
+                clickSound.currentTime = 0;
+                clickSound.play().catch(() => {});
+            }
+        }
+        
+            //legendBtn.addEventListener('click', function(e) {
+                //e.stopPropagation();
+                //if (legend.classList.contains('active')) {        
+                    //legend.classList.remove('active');
+                //} else {
+            
+            //document.body.addEventListener('click', function initAudio() {
+                //playClickSound();
+                //document.body.removeEventListener('click', initAudio);
+            //}, { once: true });
+        //};
     </script>
 </body>
 </html>
