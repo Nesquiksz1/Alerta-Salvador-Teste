@@ -1034,11 +1034,45 @@
             const infoPanel = document.getElementById('infoPanel');
             const linksMenu = document.getElementById('linksMenu');
 
-            function closeAllPopups() {
-                legend.classList.remove('active');
-                infoPanel.classList.remove('active');
-                linksMenu.classList.remove('active');
-            }
+            legendBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (legend.classList.contains('active')) {
+                    legend.classList.remove('active');
+                } else {
+                    closeAllPopups();
+                    legend.classList.add('active');
+                }
+                playClickSound();
+            });
+            
+            infoBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (infoPanel.classList.contains('active')) {
+                    infoPanel.classList.remove('active');
+                } else {
+                    closeAllPopups();
+                    infoPanel.classList.add('active');
+                }
+                playClickSound();
+            });
+            
+            linksBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (linksMenu.classList.contains('active')) {
+                    linksMenu.classList.remove('active');
+                } else {
+                    closeAllPopups();
+                    linksMenu.classList.add('active');
+                }
+                playClickSound();
+            });
+            
+            //function closeAllPopups() {
+               // legend.classList.remove('active');
+                //infoPanel.classList.remove('active');
+                //linksMenu.classList.remove('active');
+           // }
+            
             function playClickSound() {
                 const clickSound = document.getElementById('clickSound');
                 if (clickSound) {
