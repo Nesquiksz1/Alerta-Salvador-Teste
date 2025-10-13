@@ -952,7 +952,7 @@
                     <span class="risk-badge ${riskBadgeClass}">${riskText}</span>
                 </div>
                 <div class="popup-stats">
-                    <h4>📊 Estatísticas de Segurança</h4>
+                    <h4>📊 Estatísticas de Segurança (2024-2025)</h4>
                     <p>🔫 Tiroteios registrados: <span class="stat-value">${area.stats.tiroteios}</span></p>
                     <p>⚰️ Vítimas fatais: <span class="stat-value">${area.stats.vitimas}</span></p>
                     <p>🩸 Pessoas baleadas: <span class="stat-value">${area.stats.baleados}</span></p>
@@ -1039,7 +1039,6 @@
                 infoPanel.classList.remove('active');
                 linksMenu.classList.remove('active');
             }
-
             function playClickSound() {
                 const clickSound = document.getElementById('clickSound');
                 if (clickSound) {
@@ -1047,28 +1046,11 @@
                     clickSound.play().catch(() => {});
                 }
             }
-
             legendBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
-                closeAllPopups();
-                legend.classList.toggle('active');
-                playClickSound();
-            });
-
-            infoBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                closeAllPopups();
-                infoPanel.classList.toggle('active');
-                playClickSound();
-            });
-
-            linksBtn.addEventListener('click', function(e) {
-                e.stopPropagation();
-                closeAllPopups();
-                linksMenu.classList.toggle('active');
-                playClickSound();
-            });
-
+                if (legend.classList.contains('active')) {        
+                    legend.classList.remove('active');
+                } else {
             document.body.addEventListener('click', function(e) {
                 if (
                     !legend.contains(e.target) && e.target !== legendBtn &&
@@ -1078,7 +1060,6 @@
                     closeAllPopups();
                 }
             });
-
             document.body.addEventListener('click', function initAudio() {
                 playClickSound();
                 document.body.removeEventListener('click', initAudio);
