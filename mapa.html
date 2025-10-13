@@ -578,6 +578,11 @@
     
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
     <script>
+        // Adicione na PRIMEIRA linha dentro do <script>
+        if (performance.navigation.type === 1) {
+            window.location.replace('index.html');
+        }
+        
         // Função para tocar o som de clique
         function playClickSound() {
             try {
@@ -1071,7 +1076,7 @@
                 legend.classList.remove('active');
                 infoPanel.classList.remove('active');
                 linksMenu.classList.remove('active');
-            });
+            }});
             
             function playClickSound() {
                 const clickSound = document.getElementById('clickSound');
@@ -1080,6 +1085,7 @@
                     clickSound.play().catch(() => {});
                 }
             }
+        
             legendBtn.addEventListener('click', function(e) {
                 e.stopPropagation();
                 if (legend.classList.contains('active')) {        
