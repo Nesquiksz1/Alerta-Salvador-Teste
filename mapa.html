@@ -1031,50 +1031,99 @@
         });
         
         //==================== NOVO CÓDIGO PARA POPUPS E SOM ====================
+        // Painéis de info/legenda/links
+        document.getElementById('legendToggle').addEventListener('click', function() {
+            document.getElementById('legend').classList.toggle('active');
+        });
+        document.getElementById('infoToggle').addEventListener('click', function() {
+            document.getElementById('infoPanel').classList.toggle('active');
+        });
+        document.getElementById('linksToggle').addEventListener('click', function() {
+            document.getElementById('linksMenu').classList.toggle('active');
+        });
+        
+        //==================== NOVO CÓDIGO PARA POPUPS E SOM ====================
         document.addEventListener('DOMContentLoaded', function() {
-            // Inicializar áudio na primeira interação
-            document.body.addEventListener('click', initializeAudio, { once: true });
-            document.body.addEventListener('touchstart', initializeAudio, { once: true });
+            const legendBtn = document.getElementById('legendToggle');
+            const infoBtn = document.getElementById('infoToggle');
+            const linksBtn = document.getElementById('linksToggle');
+            const legend = document.getElementById('legend');
+            const infoPanel = document.getElementById('infoPanel');
+            const linksMenu = document.getElementById('linksMenu');
 
-            const legendToggle = document.getElementById("legendToggle");
-            const infoToggle = document.getElementById("infoToggle");
-            const linksToggle = document.getElementById("linksToggle");
-
-            const legend = document.getElementById("legend");
-            const infoPanel = document.getElementById("infoPanel");
-            const linksMenu = document.getElementById("linksMenu");
-
-            // Função para fechar todos os popups, exceto o selecionado
-            function closeOthers(except) {
-                if (except !== 'legend') legend.classList.remove('active');
-                if (except !== 'info') infoPanel.classList.remove('active');
-                if (except !== 'links') linksMenu.classList.remove('active');
+            function closeAllPopups() {
+                legend.classList.remove('active');
+                infoPanel.classList.remove('active');
+                linksMenu.classList.remove('active');
             }
-
-        // Alternar visualização da legenda
-        legendToggle.addEventListener('click', function() {
-            legend.classList.toggle('active');
-            closeOthers('legend');
+            
+            legendBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (legend.classList.contains('active')) {
+                    legend.classList.remove('active');
+                } else {
+                    closeAllPopups();
+                    legend.classList.add('active');
+                }
+                playClickSound();
+            });
+            
+            infoBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (infoPanel.classList.contains('active')) {
+                    infoPanel.classList.remove('active');
+                } else {
+                    closeAllPopups();
+                    infoPanel.classList.add('active');
+                }
+                playClickSound();
+            });
+            
+            linksBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (linksMenu.classList.contains('active')) {
+                    linksMenu.classList.remove('active');
+                } else {
+                    closeAllPopups();
+                    linksMenu.classList.add('active');
+                }
+                playClickSound();
+            });
+        
+        document.body.addEventListener('click', function(e) {
+                if (
+                    !legend.contains(e.target) && e.target !== legendBtn &&
+                    !infoPanel.contains(e.target) && e.target !== infoBtn &&
+                    !linksMenu.contains(e.target) && e.target !== linksBtn
+                ) {
+                    closeAllPopups();
+                }
+            });
+            // Adicionar som de clique aos botões
+            [legendBtn, infoBtn, linksBtn].forEach(function(element) {
+                element.addEventListener('touchstart', playClickSound);
+            });
         });
-
-        // Alternar visualização do painel de informações
-        infoToggle.addEventListener('click', function() {
-            infoPanel.classList.toggle('active');
-            closeOthers('info');
-        });
-
-        // Alternar visualização do menu de links
-        linksToggle.addEventListener('click', function() {
-            linksMenu.classList.toggle('active');
-            closeOthers('links');
-        });
-
-        // Adicionar som de clique aos botões
-        [legendToggle, infoToggle, linksToggle].forEach(function(element) {
-            element.addEventListener('click', playClickSound);
-            element.addEventListener('touchstart', playClickSound);
-        });
-    });
+        
+        function playClickSound() {
+            const clickSound = document.getElementById('clickSound');
+            if (clickSound) {
+                clickSound.currentTime = 0;
+                clickSound.play().catch(() => {});
+            }
+        }
+        
+            //legendBtn.addEventListener('click', function(e) {
+                //e.stopPropagation();
+                //if (legend.classList.contains('active')) {        
+                    //legend.classList.remove('active');
+                //} else {
+            
+            //document.body.addEventListener('click', function initAudio() {
+                //playClickSound();
+                //document.body.removeEventListener('click', initAudio);
+            //}, { once: true });
+        //};
         
         function playClickSound() {
             const clickSound = document.getElementById('clickSound');
