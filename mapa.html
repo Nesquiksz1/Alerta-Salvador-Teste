@@ -661,7 +661,7 @@
                     const weatherCode = data.daily.weathercode[idxHoje];
                     const condition = {
                         0: "Céu Limpo",
-                        1: "Principalmente Limpo",
+                        1: "Parcipalmente Limpo",
                         2: "Parcialmente Nublado",
                         3: "Nublado",
                         45: "Névoa",
@@ -687,7 +687,7 @@
                 console.error('Erro ao obter dados do clima:', error);
             }
         }
-        setInterval(updateWeather, 18000);
+        setInterval(updateWeather, 3600000);
         updateWeather();
 
         // ================================ NOVO CÓDIGO IRAS ===========================
