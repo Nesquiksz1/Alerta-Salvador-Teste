@@ -760,205 +760,241 @@
 
         // Dados brutos das áreas de risco
         const rawAreas = [
-            {
-                name: "Lobato",
-                center: [-12.918201, -38.481219],
-                radius: 600,
-                stats: { tiroteios: 73, 
-                        vitimas: 58, 
-                        baleados: 14, 
-                        operacoes: 20, 
-                        disputas: 7 },
-                recommendation: "Área com disputas territoriais. Evite circular à noite. Mantenha-se atento em áreas comerciais."
-            },
-            {
-                name: "Pernambués",
-                center: [-12.970441, -38.464628],
-                radius: 800,
-                stats: { tiroteios: 66, 
-                        vitimas: 40, 
-                        baleados: 04, 
-                        operacoes: 24,
-                        disputas: 10 },
-                recommendation: "Evite circular à noite. Mantenha-se atento em áreas comerciais. Não exiba objetos de valor."
-            },
-            {
-                name: "Fazenda Grande do Retiro",
-                center: [-12.941721, -38.480473],
-                radius: 700,
-                stats: { tiroteios: 53, 
-                        vitimas: 50,
-                        baleados: 09,
-                        operacoes: 28,
-                        disputas: 04 },
-                recommendation: "Área com alta presença de facções. Evite circular sem conhecer a região. Prefira horários comerciais."
-            },
-            {
-                name: "Beiru/Tancredo Neves",
-                center: [-12.944604, -38.447130],
-                radius: 800,
-                stats: { tiroteios: 68,
-                        vitimas: 32,
-                        baleados: 17,
-                        operacoes: 37,
-                        disputas: 11 },
-                recommendation: "Evite transitar sozinho. Mantenha-se atento a movimentações suspeitas. Não exiba objetos de valor."
-            },
-            {
-                name: "Fazenda Coutos",
-                center: [-12.846867, -38.461866],
-                radius: 550,
-                stats: { tiroteios: 57,
-                        vitimas: 41,
-                        baleados: 12,
-                        operacoes: 21,
-                        disputas: 22 },
-                recommendation: "Evite circular à noite. Mantenha-se atento em áreas comerciais. Não exiba objetos de valor."
-            },
-            {
-                name: "Valéria",
-                center: [-12.861244, -38.436772],
-                radius: 1200,
-                stats: { tiroteios: 50,
-                        vitimas: 33,
-                        baleados: 11,
-                        operacoes: 33, 
-                        disputas: 1 },
-                recommendation: "Área com presença de facções. Evite circular sem conhecer a região. Prefira horários comerciais."
-            },
-            {
-                name: "Federação",
-                center: [-12.995377, -38.502772],
-                radius: 600,
-                stats: { tiroteios: 95,
-                        vitimas: 33,
-                        baleados: 11,
-                        operacoes: 46,
-                        disputas: 27 },
-                recommendation: "Mantenha-se atento em áreas comerciais. Evite ruas menos movimentadas. Não exiba objetos de valor."
-            },
-            {
-                name: "Itapuã",
-                center: [-12.93640, -38.36280],
-                radius: 1000,
-                stats: { tiroteios: 40,
-                        vitimas: 30,
-                        baleados: 04, 
-                        operacoes: 16, 
-                        disputas: 2 },
-                recommendation: "Mantenha-se atento em áreas turísticas. Evite praias desertas. Não exiba objetos de valor."
-            },
-            {
-                name: "São Cristóvão",
-                center: [-12.908290, -38.360860],
-                radius: 800,
-                stats: { tiroteios: 48,
-                        vitimas: 33, 
-                        baleados: 09,
-                        operacoes: 25,
-                        disputas: 02 },
-                recommendation: "Mantenha-se atento em áreas comerciais. Evite circular à noite. Não exiba objetos de valor."
-            },
-            {
-                name: "Periperi",
-                center: [-12.863425, -38.474542],
-                radius: 800,
-                stats: { tiroteios: 41,
-                        vitimas: 22,
-                        baleados: 14, 
-                        operacoes: 19, 
-                        disputas: 13 },
-                recommendation: "Evite circular à noite. Mantenha-se atento em áreas comerciais. Não exiba objetos de valor."
-            },
-            {
-                name: "Paripe",
-                center: [-12.834079, -38.469006],
-                radius: 800,
-                stats: { tiroteios: 41, 
-                        vitimas: 35,
-                        baleados: 09, 
-                        operacoes: 10,
-                        disputas: 2 },
-                recommendation: "Evite circular sem conhecer a região. Prefira horários comerciais. Não exiba objetos de valor."
-            },
-            {
-                name: "Liberdade",
-                center: [-12.946042, -38.493667],
-                radius: 550,
-                stats: { tiroteios: 39,
-                        vitimas: 23, 
-                        baleados: 12,
-                        operacoes: 14,
-                        disputas: 0 },
-                recommendation: "Mantenha-se atento em áreas comerciais. Evite ruas menos movimentadas. Não exiba objetos de valor."
-            },
-            {
-                name: "IAPI",
-                center: [-12.953257, -38.480146],
-                radius: 550,
-                stats: { tiroteios: 44,
-                        vitimas: 31,
-                        baleados: 12,
-                        operacoes: 20,
-                        disputas: 3 },
-                recommendation: "Mantenha-se atento em áreas comerciais. Evite ruas menos movimentadas. Não exiba objetos de valor."
-            },
-            {
-                name: "Barra",
-                center: [-13.00577, -38.52839],
-                radius: 750,
-                stats: { tiroteios: 8,
-                        vitimas: 2, 
-                        baleados: 4,
-                        operacoes: 5,
-                        disputas: 0 },
-                recommendation: "Mantenha-se atento em áreas turísticas. Evite praias desertas á noite. Não exiba objetos de valor."
-            },
-            {
-                name: "Pituba",
-                center: [-13.00251, -38.45925],
-                radius: 900,
-                stats: { tiroteios: 7,
-                        vitimas: 1,
-                        baleados: 2,
-                        operacoes: 2,
-                        disputas: 0 },
-                recommendation: "Mantenha-se atento em áreas comerciais. Evite ruas menos movimentadas. Não exiba objetos de valor."
-            },
-            {
-                name: "Itaigara",
-                center: [-12.99252, -38.46784],
-                radius: 600,
-                stats: { tiroteios: 3, 
-                        vitimas: 0,
-                        baleados: 4,
-                        operacoes: 0,
-                        disputas: 0 },
-                recommendation: "Mantenha-se atento em áreas comerciais. Evite ruas menos movimentadas. Não exiba objetos de valor."
-            },
-            {
-                name: "Engomadeira",
-                center: [-12.949484, -38.456706],
-                radius: 350,
-                stats: { tiroteios: 19,
-                        vitimas: 6, 
-                        baleados: 8,
-                        operacoes: 16,
-                        disputas: 2 },
-                recommendation: "Mantenha-se atento em áreas comerciais. Evite ruas menos movimentadas. Não exiba objetos de valor."
-            }, 
-            {
-                name: "Cajazeiras",
-                center: [0 , 0],
-                radius: 0,
-                stats: { tiroteios: 0 , 
-                        vitimas: 0 ,
-                        baleados: 0, 
-                        operacoes: 0,
-                        disputas: 0 },
-                recommendation: "Evite circular sem conhecer a região. Prefira horários comerciais. Não exiba objetos de valor."
-            },
-        ];
+    {
+        name: 'Lobato',
+        center: [-12.921029, -38.485105],
+        radius: 600,
+        stats: {
+            tiroteios: 8,
+            vitimas: 9,
+            baleados: 2,
+            operacoes: 0,
+            disputas: 3
+        },
+        recommendation: "Área com disputas territoriais. Evite circular à noite. Mantenha-se atento em áreas comerciais."
+    },
+    {
+        name: 'Pernambués',
+        center: [-12.970875, -38.462439],
+        radius: 600,
+        stats: {
+            tiroteios: 15,
+            vitimas: 6,
+            baleados: 2,
+            operacoes: 0,
+            disputas: 0
+        },
+        recommendation: "Evite circular à noite. Mantenha-se atento em áreas comerciais. Não exiba objetos de valor."
+    },
+    {
+        name: 'Fazenda Grande do Retiro',
+        center: [-12.940891, -38.480668],
+        radius: 600,
+        stats: {
+            tiroteios: 4,
+            vitimas: 1,
+            baleados: 1,
+            operacoes: 0,
+            disputas: 1
+        },
+        recommendation: "Área com alta presença de facções. Evite circular sem conhecer a região. Prefira horários comerciais."
+    },
+    {
+        name: 'Beiru/Tancredo Neves',
+        center: [-12.945316, -38.448874],
+        radius: 600,
+        stats: {
+            tiroteios: 24,
+            vitimas: 11,
+            baleados: 0,
+            operacoes: 0,
+            disputas: 8
+        },
+        recommendation: "Evite transitar sozinho. Mantenha-se atento a movimentações suspeitas. Não exiba objetos de valor."
+    },
+    {
+        name: 'Fazenda Coutos',
+        center: [-12.847898, -38.460567],
+        radius: 600,
+        stats: {
+            tiroteios: 3,
+            vitimas: 2,
+            baleados: 0,
+            operacoes: 0,
+            disputas: 0
+        },
+        recommendation: "Evite circular à noite. Mantenha-se atento em áreas comerciais. Não exiba objetos de valor."
+    },
+    {
+        name: 'Valéria',
+        center: [-12.865508, -38.437891],
+        radius: 600,
+        stats: {
+            tiroteios: 12,
+            vitimas: 7,
+            baleados: 3,
+            operacoes: 0,
+            disputas: 0
+        },
+        recommendation: "Área com presença de facções. Evite circular sem conhecer a região. Prefira horários comerciais."
+    },
+    {
+        name: 'Federação',
+        center: [-12.996746, -38.504339],
+        radius: 600,
+        stats: {
+            tiroteios: 2,
+            vitimas: 2,
+            baleados: 0,
+            operacoes: 0,
+            disputas: 0
+        },
+        recommendation: "Mantenha-se atento em áreas comerciais. Evite ruas menos movimentadas. Não exiba objetos de valor."
+    },
+    {
+        name: 'Itapuã',
+        center: [-12.943693, -38.364902],
+        radius: 600,
+        stats: {
+            tiroteios: 14,
+            vitimas: 10,
+            baleados: 5,
+            operacoes: 0,
+            disputas: 0
+        },
+        recommendation: "Mantenha-se atento em áreas turísticas. Evite praias desertas. Não exiba objetos de valor."
+    },
+    {
+        name: 'São Cristóvão',
+        center: [-12.911248, -38.356280],
+        radius: 600,
+        stats: {
+            tiroteios: 23,
+            vitimas: 13,
+            baleados: 3,
+            operacoes: 0,
+            disputas: 3
+        },
+        recommendation: "Mantenha-se atento em áreas comerciais. Evite circular à noite. Não exiba objetos de valor."
+    },
+    {
+        name: 'Periperi',
+        center: [-12.867383, -38.472795],
+        radius: 600,
+        stats: {
+            tiroteios: 9,
+            vitimas: 7,
+            baleados: 2,
+            operacoes: 0,
+            disputas: 0
+        },
+        recommendation: "Evite circular à noite. Mantenha-se atento em áreas comerciais. Não exiba objetos de valor."
+    },
+    {
+        name: 'Paripe',
+        center: [-12.837461, -38.465740],
+        radius: 600,
+        stats: {
+            tiroteios: 9,
+            vitimas: 6,
+            baleados: 1,
+            operacoes: 0,
+            disputas: 0
+        },
+        recommendation: "Evite circular sem conhecer a região. Prefira horários comerciais. Não exiba objetos de valor."
+    },
+    {
+        name: 'Liberdade',
+        center: [-12.898482, -38.478358],
+        radius: 600,
+        stats: {
+            tiroteios: 11,
+            vitimas: 6,
+            baleados: 2,
+            operacoes: 0,
+            disputas: 2
+        },
+        recommendation: "Mantenha-se atento em áreas comerciais. Evite ruas menos movimentadas. Não exiba objetos de valor."
+    },
+    {
+        name: 'IAPI',
+        center: [-12.956659, -38.482012],
+        radius: 600,
+        stats: {
+            tiroteios: 6,
+            vitimas: 3,
+            baleados: 4,
+            operacoes: 0,
+            disputas: 1
+        },
+        recommendation: "Mantenha-se atento em áreas comerciais. Evite ruas menos movimentadas. Não exiba objetos de valor."
+    },
+    {
+        name: 'Barra',
+        center: [null, null],
+        radius: 600,
+        stats: {
+            tiroteios: 0,
+            vitimas: 0,
+            baleados: 0,
+            operacoes: 0,
+            disputas: 0
+        },
+        recommendation: "Mantenha-se atento em áreas turísticas. Evite praias desertas á noite. Não exiba objetos de valor."
+    },
+    {
+        name: 'Pituba',
+        center: [-12.995939, -38.457261],
+        radius: 600,
+        stats: {
+            tiroteios: 2,
+            vitimas: 1,
+            baleados: 0,
+            operacoes: 1,
+            disputas: 0
+        },
+        recommendation: "Mantenha-se atento em áreas comerciais. Evite ruas menos movimentadas. Não exiba objetos de valor."
+    },
+    {
+        name: 'Itaigara',
+        center: [null, null],
+        radius: 600,
+        stats: {
+            tiroteios: 0,
+            vitimas: 0,
+            baleados: 0,
+            operacoes: 0,
+            disputas: 0
+        },
+        recommendation: "Mantenha-se atento em áreas comerciais. Evite ruas menos movimentadas. Não exiba objetos de valor."
+    },
+    {
+        name: 'Engomadeira',
+        center: [-12.949876, -38.457464],
+        radius: 600,
+        stats: {
+            tiroteios: 5,
+            vitimas: 3,
+            baleados: 2,
+            operacoes: 0,
+            disputas: 0
+        },
+        recommendation: "Mantenha-se atento em áreas comerciais. Evite ruas menos movimentadas. Não exiba objetos de valor."
+    },
+    {
+        name: 'Cajazeiras',
+        center: [-12.897, -38.418],
+        radius: 600,
+        stats: {
+            tiroteios: 21,
+            vitimas: 15,
+            baleados: 3,
+            operacoes: 1,
+            disputas: 3
+        },
+        recommendation: "Evite circular sem conhecer a região. Prefira horários comerciais. Não exiba objetos de valor."
+    }
+];
 
         // Gera o array final com IRAS e nível de risco calculados
         const riskAreas = rawAreas.map(area => {
