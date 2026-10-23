@@ -299,7 +299,7 @@
             font-size: 1.1rem;
             font-weight: bold;
             color: #333333;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-align: center;
             border-bottom: 2px solid #cc0000;
             padding-bottom: 5px;
@@ -309,32 +309,9 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             font-weight: bold;
             color: #333333;
-        }
-
-        .popup-score-box {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(204, 0, 0, 0.08), rgba(255, 153, 0, 0.12));
-            border: 1px solid rgba(204, 0, 0, 0.15);
-            border-radius: 8px;
-            padding: 10px 8px;
-            margin-bottom: 12px;
-        }
-
-        .popup-score-box strong {
-            font-size: 1.5rem;
-            color: #cc0000;
-            line-height: 1;
-        }
-
-        .popup-score-box span {
-            font-size: 0.7rem;
-            color: #666666;
         }
 
         .risk-badge {
@@ -358,10 +335,33 @@
             color: #333333;
         }
 
-        .popup-stats {
-            margin-bottom: 10px;
+        .popup-score-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, rgba(204, 0, 0, 0.08), rgba(255, 153, 0, 0.12));
+            border: 1px solid rgba(204, 0, 0, 0.15);
+            border-radius: 8px;
+            padding: 10px 8px;
+        }
+
+        .popup-score-box strong {
+            font-size: 1.5rem;
+            color: #cc0000;
+            line-height: 1;
+        }
+
+        .popup-score-box span {
+            font-size: 0.7rem;
+            color: #666666;
+        }
+
+        .popup-metrics {
             display: grid;
             gap: 8px;
+            margin-bottom: 10px;
         }
 
         .popup-metric {
@@ -371,25 +371,47 @@
             border-left: 3px solid #cc0000;
         }
 
-        .metric-header {
+        .popup-metric-head {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            gap: 10px;
-            font-size: 0.8rem;
+            align-items: center;
+            margin-bottom: 5px;
             color: #333333;
+            font-size: 0.78rem;
         }
 
-        .metric-header strong {
+        .popup-metric-head strong {
             color: #cc0000;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
         }
 
-        .metric-footer {
-            display: block;
-            margin-top: 2px;
-            font-size: 0.7rem;
-            color: #666666;
+        .metric-bar {
+            position: relative;
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .metric-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        .metric-fill.high {
+            background: linear-gradient(90deg, #cc0000, #e53935);
+        }
+
+        .metric-fill.medium {
+            background: linear-gradient(90deg, #ff9900, #ffb347);
+        }
+
+        .metric-fill.low {
+            background: linear-gradient(90deg, #ffcc00, #ffd966);
         }
 
         .popup-alert {
@@ -410,7 +432,6 @@
             font-size: 0.8rem;
             color: #333333;
             border-left: 3px solid #cc0000;
-            line-height: 1.4;
         }
 
         @media (max-width: 768px) {
@@ -511,23 +532,23 @@
             <h3 class="legend-title">Níveis de Risco</h3>
             <div class="legend-item">
                 <div class="legend-color high-risk"></div>
-                <span class="legend-text">Alto Risco (IRAS ≥ 70)</span>
+                <span class="legend-text">Alto risco (IRAS 70–100)</span>
             </div>
             <div class="legend-item">
                 <div class="legend-color medium-risk"></div>
-                <span class="legend-text">Médio Risco (IRAS 35-69)</span>
+                <span class="legend-text">Médio risco (IRAS 35–69)</span>
             </div>
             <div class="legend-item">
                 <div class="legend-color low-risk"></div>
-                <span class="legend-text">Baixo Risco (IRAS &lt; 35)</span>
+                <span class="legend-text">Baixo risco (IRAS 0–34)</span>
             </div>
         </div>
 
         <div class="info-panel" id="infoPanel">
             <h3 class="info-title">Sobre o Alerta Salvador</h3>
             <div class="info-content">
-                <p>O Alerta Salvador é um sistema de monitoramento de áreas de risco em Salvador, baseado em dados recentes e em indicadores localizados de violência.</p>
-                <p style="margin-top: 8px;">O Índice de Risco Alerta Salvador (IRAS) considera a severidade dos eventos em um período de 6 a 8 meses. A morte por arma de fogo pesa muito mais do que a soma de pequenos indicadores isolados.</p>
+                <p>O Alerta Salvador é um sistema de monitoramento de áreas de risco em Salvador, baseado em dados recentes e em indicadores locais de violência.</p>
+                <p style="margin-top: 8px;">A escala foi ajustada para refletir melhor a gravidade real: uma área com 8 ou 10 mortes em 6 a 8 meses pesa muito mais do que vários indicadores baixos somados.</p>
                 <p style="margin-top: 8px;">Clique nas áreas coloridas para ver informações detalhadas sobre cada região.</p>
             </div>
         </div>
@@ -736,7 +757,6 @@
             if (iras > 100) iras = 100;
 
             let riskLevel = 'low';
-
             if (iras >= 70) riskLevel = 'high';
             else if (iras >= 35) riskLevel = 'medium';
 
@@ -1035,42 +1055,45 @@
             }
         }
 
+        function getMetricFillClass(value, maxValue) {
+            const percentage = (value / maxValue) * 100;
+            if (percentage >= 70) return 'high';
+            if (percentage >= 35) return 'medium';
+            return 'low';
+        }
+
         function getPopupContent(area) {
-            const metricDefinitions = [
-                { label: 'Tiroteios', value: area.stats.tiroteios, note: 'incidentes com disparos' },
-                { label: 'Vítimas fatais', value: area.stats.vitimas, note: 'mortes em 6 e 8 meses' },
-                { label: 'Pessoas baleadas', value: area.stats.baleados, note: 'feridos por arma de fogo' },
-                { label: 'Operações policiais', value: area.stats.operacoes, note: 'ações de repressão' },
-                { label: 'Disputas territoriais', value: area.stats.disputas, note: 'conflitos por território' }
+            const metricConfig = [
+                { label: 'Tiroteios', value: area.stats.tiroteios, max: 30 },
+                { label: 'Vítimas fatais', value: area.stats.vitimas, max: 15 },
+                { label: 'Baleados', value: area.stats.baleados, max: 10 },
+                { label: 'Operações', value: area.stats.operacoes, max: 5 },
+                { label: 'Disputas', value: area.stats.disputas, max: 10 }
             ];
 
-            const metricRows = metricDefinitions.map((metric) => {
-                const points =
-                    metric.label === 'Tiroteios' ? metric.value * 2 :
-                    metric.label === 'Vítimas fatais' ? metric.value * 12 :
-                    metric.label === 'Pessoas baleadas' ? metric.value * 5 :
-                    metric.label === 'Operações policiais' ? metric.value * 3 :
-                    metric.value * 4;
-
+            const metricHtml = metricConfig.map((metric) => {
+                const percentage = Math.min(100, (metric.value / metric.max) * 100);
+                const fillClass = getMetricFillClass(metric.value, metric.max);
                 return `
                     <div class="popup-metric">
-                        <div class="metric-header">
+                        <div class="popup-metric-head">
                             <span>${metric.label}</span>
                             <strong>${metric.value}</strong>
                         </div>
-                        <small class="metric-footer">${points} pts · ${metric.note}</small>
+                        <div class="metric-bar">
+                            <div class="metric-fill ${fillClass}" style="width:${percentage}%"></div>
+                        </div>
                     </div>
                 `;
             }).join('');
 
-            let alertText = 'Risco monitorado por indicadores locais e histórico recente.';
-
+            let alertText = 'Risco moderado, porém ainda exige atenção.';
             if (area.stats.vitimas >= 8) {
-                alertText = `${area.stats.vitimas} vítimas fatais em 6 a 8 meses indica um nível de risco altamente crítico.`;
+                alertText = `${area.stats.vitimas} vítimas fatais em 6 a 8 meses indica nível de risco crítico.`;
             } else if (area.stats.vitimas >= 4) {
-                alertText = `${area.stats.vitimas} mortes em 6 a 8 meses já elevam significativamente a gravidade do risco.`;
+                alertText = `${area.stats.vitimas} mortes em 6 a 8 meses já elevam bastante o nível de perigo.`;
             } else if (area.stats.tiroteios >= 20) {
-                alertText = `${area.stats.tiroteios} tiroteios em 6 a 8 meses mostram uma pressão intensa na região.`;
+                alertText = `${area.stats.tiroteios} tiroteios em 6 a 8 meses mostra grande pressão da área.`;
             }
 
             return `
@@ -1083,8 +1106,8 @@
                     <strong>${Math.round(area.iras)}</strong>
                     <span>pontos / 100</span>
                 </div>
-                <div class="popup-stats">
-                    ${metricRows}
+                <div class="popup-metrics">
+                    ${metricHtml}
                 </div>
                 <div class="popup-alert">
                     ${alertText}
