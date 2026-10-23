@@ -656,78 +656,78 @@
         updateDateTime();
 
         async function updateWeather() {
-            try {
-                const lat = -12.9777;
-                const lon = -38.5016;
+    try {
+        const lat = -12.9777;
+        const lon = -38.5016;
 
-                const url =
-                    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
-                    `&daily=temperature_2m_min,temperature_2m_max,precipitation_sum,weathercode` +
-                    `&timezone=auto&forecast_days=1`;
+        const url =
+            `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
+            `&daily=temperature_2m_min,temperature_2m_max,precipitation_sum,weather_code` +
+            `&timezone=auto&forecast_days=1`;
 
-                const response = await fetch(url);
+        const response = await fetch(url);
 
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-
-                const data = await response.json();
-
-                if (!data.daily || !data.daily.time || !data.daily.time.length) {
-                    document.getElementById('weather-value').textContent = 'Indisponível';
-                    return;
-                }
-
-                const hoje = new Date();
-                const hojeStr = hoje.toLocaleDateString('sv-SE');
-
-                let idxHoje = data.daily.time.findIndex((t) => t === hojeStr);
-                if (idxHoje === -1) idxHoje = 0;
-
-                const tempMin = Number(data.daily.temperature_2m_min[idxHoje]).toFixed(1);
-                const tempMax = Number(data.daily.temperature_2m_max[idxHoje]).toFixed(1);
-                const chuva = Number(data.daily.precipitation_sum[idxHoje]);
-                const weatherCode = Number(data.daily.weathercode[idxHoje]);
-
-                const conditionMap = {
-                    0: 'Céu Limpo',
-                    1: 'Principalmente Limpo',
-                    2: 'Parcialmente Nublado',
-                    3: 'Nublado',
-                    45: 'Névoa',
-                    48: 'Névoa Congelante',
-                    51: 'Chuvisco Fraco',
-                    53: 'Chuvisco Moderado',
-                    55: 'Chuvisco Intenso',
-                    56: 'Chuvisco Congelante Fraco',
-                    57: 'Chuvisco Congelante Intenso',
-                    61: 'Chuva Fraca',
-                    63: 'Chuva Moderada',
-                    65: 'Chuva Forte',
-                    66: 'Chuva Congelante Fraca',
-                    67: 'Chuva Congelante Forte',
-                    71: 'Neve Fraca',
-                    73: 'Neve Moderada',
-                    75: 'Neve Forte',
-                    77: 'Cristais de Gelo',
-                    80: 'Pancadas Fracas',
-                    81: 'Pancadas Moderadas',
-                    82: 'Pancadas Fortes',
-                    95: 'Trovoada',
-                    96: 'Trovoada com Granizo Fraco',
-                    99: 'Trovoada com Granizo Forte'
-                };
-
-                const condition = conditionMap[weatherCode] || 'Condição Desconhecida';
-
-                document.getElementById('weather-value').textContent =
-                    `${condition}, ${tempMin}°C/${tempMax}°C, Chuva: ${chuva}mm`;
-
-            } catch (error) {
-                console.error('Erro ao obter dados do clima:', error);
-                document.getElementById('weather-value').textContent = 'Indisponível';
-            }
+        if (!response.ok) {
+            throw new Error(`HTTP ${response.status}`);
         }
+
+        const data = await response.json();
+
+        if (!data.daily || !data.daily.time || !data.daily.time.length) {
+            document.getElementById('weather-value').textContent = 'Indisponível';
+            return;
+        }
+
+        const hoje = new Date();
+        const hojeStr = hoje.toLocaleDateString('sv-SE');
+
+        const idxHoje = data.daily.time.findIndex((t) => t === hojeStr);
+        const index = idxHoje === -1 ? 0 : idxHoje;
+
+        const tempMin = Number(data.daily.temperature_2m_min[index]).toFixed(1);
+        const tempMax = Number(data.daily.temperature_2m_max[index]).toFixed(1);
+        const chuva = Number(data.daily.precipitation_sum[index]);
+        const weatherCode = Number(data.daily.weather_code[index] ?? 0);
+
+        const conditionMap = {
+            0: 'Céu Limpo',
+            1: 'Principalmente Limpo',
+            2: 'Parcialmente Nublado',
+            3: 'Nublado',
+            45: 'Névoa',
+            48: 'Névoa Congelante',
+            51: 'Chuvisco Fraco',
+            53: 'Chuvisco Moderado',
+            55: 'Chuvisco Intenso',
+            56: 'Chuvisco Congelante Fraco',
+            57: 'Chuvisco Congelante Intenso',
+            61: 'Chuva Fraca',
+            63: 'Chuva Moderada',
+            65: 'Chuva Forte',
+            66: 'Chuva Congelante Fraca',
+            67: 'Chuva Congelante Forte',
+            71: 'Neve Fraca',
+            73: 'Neve Moderada',
+            75: 'Neve Forte',
+            77: 'Cristais de Gelo',
+            80: 'Pancadas Fracas',
+            81: 'Pancadas Moderadas',
+            82: 'Pancadas Fortes',
+            95: 'Trovoada',
+            96: 'Trovoada com Granizo Fraco',
+            99: 'Trovoada com Granizo Forte'
+        };
+
+        const condition = conditionMap[weatherCode] || 'Condição Desconhecida';
+
+        document.getElementById('weather-value').textContent =
+            `${condition}, ${tempMin}°C/${tempMax}°C, Chuva: ${chuva}mm`;
+
+    } catch (error) {
+        console.error('Erro ao obter dados do clima:', error);
+        document.getElementById('weather-value').textContent = 'Indisponível';
+    }
+}
 
         setInterval(updateWeather, 3600000);
         updateWeather();
