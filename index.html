@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Alerta Salvador 7.0 - Carregando</title>
-    <link rel="icon" type="image/jpeg" href="logo_alerta_salvador.png">
+    <link rel="icon" type="image/jpeg" href="logo_seguranca.jpg" />
     <style>
         * {
             margin: 0;
@@ -12,7 +12,7 @@
             box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
             background-color: #cc0000;
             height: 100vh;
@@ -22,7 +22,7 @@
             align-items: center;
             overflow: hidden;
         }
-        
+
         .splash-container {
             display: flex;
             flex-direction: column;
@@ -30,20 +30,20 @@
             justify-content: center;
             text-align: center;
         }
-        
+
         .logo-container {
             width: 180px;
             height: 180px;
             margin-bottom: 20px;
             animation: subtle-float 2.5s ease-in-out infinite;
         }
-        
+
         .logo {
             width: 100%;
             height: 100%;
             object-fit: contain;
         }
-        
+
         .site-title {
             color: #ffffff;
             font-size: 2.5rem;
@@ -52,7 +52,7 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
             animation: fade-in 1s ease-in;
         }
-        
+
         .subtitle {
             color: #ffffff;
             font-size: 1.2rem;
@@ -60,14 +60,14 @@
             opacity: 0.9;
             animation: fade-in 1.5s ease-in;
         }
-        
+
         .loading-container {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 20px;
         }
-        
+
         .loading-bar {
             width: 300px;
             height: 6px;
@@ -76,21 +76,21 @@
             overflow: hidden;
             position: relative;
         }
-        
+
         .loading-progress {
             height: 100%;
             background-color: #ffffff;
             border-radius: 3px;
             animation: loading 3s ease-in-out forwards;
         }
-        
+
         .loading-text {
             color: #ffffff;
             font-size: 1rem;
             opacity: 0.8;
             animation: pulse 1.5s ease-in-out infinite;
         }
-        
+
         .version-info {
             position: absolute;
             bottom: 30px;
@@ -98,76 +98,51 @@
             font-size: 0.9rem;
             text-align: center;
         }
-        
+
         @keyframes subtle-float {
             0%, 100% { transform: translateY(0px); }
             50% { transform: translateY(-10px); }
         }
-        
+
         @keyframes fade-in {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        
+
         @keyframes loading {
             0% { width: 0%; }
             100% { width: 100%; }
         }
-        
+
         @keyframes pulse {
             0%, 100% { opacity: 0.8; }
             50% { opacity: 1; }
         }
-        
-        /* Responsividade */
+
         @media (max-width: 768px) {
-            .site-title {
-                font-size: 2rem;
-            }
-            
-            .subtitle {
-                font-size: 1rem;
-            }
-            
-            .logo-container {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .loading-bar {
-                width: 250px;
-            }
+            .site-title { font-size: 2rem; }
+            .subtitle { font-size: 1rem; }
+            .logo-container { width: 150px; height: 150px; }
+            .loading-bar { width: 250px; }
         }
-        
+
         @media (max-width: 480px) {
-            .site-title {
-                font-size: 1.5rem;
-            }
-            
-            .subtitle {
-                font-size: 0.9rem;
-            }
-            
-            .logo-container {
-                width: 120px;
-                height: 120px;
-            }
-            
-            .loading-bar {
-                width: 200px;
-            }
+            .site-title { font-size: 1.5rem; }
+            .subtitle { font-size: 0.9rem; }
+            .logo-container { width: 120px; height: 120px; }
+            .loading-bar { width: 200px; }
         }
     </style>
 </head>
 <body>
     <div class="splash-container">
         <div class="logo-container">
-            <img src="logo_seguranca.jpg" alt="Logo Alerta Salvador" class="logo">
+            <img src="logo_alerta_salvador.png" alt="Logo Alerta Salvador" class="logo" />
         </div>
-        
+
         <h1 class="site-title">ALERTA SALVADOR 7.0</h1>
         <p class="subtitle">SEGURANÇA PÚBLICA</p>
-        
+
         <div class="loading-container">
             <div class="loading-bar">
                 <div class="loading-progress"></div>
@@ -178,52 +153,44 @@
             </p>
         </div>
     </div>
-    
+
     <div class="version-info">
         <p>Versão 2025 - Sistema Atualizado</p>
         <p>Dados baseados em estatísticas oficiais</p>
     </div>
-    
+
     <script>
-        // Função para redirecionar
         function redirectToMap() {
             window.location.href = 'mapa.html';
         }
-        
-        // Redirecionar para o mapa após 3 segundos
-        setTimeout(redirectToMap, 3000);
-        
-        // Adicionar evento de clique para redirecionamento manual
-        document.addEventListener('DOMContentLoaded', function() {
-            document.body.addEventListener('click', redirectToMap);
-            document.body.addEventListener('touchstart', redirectToMap);
-        });
-        
-        // Atualizar texto de carregamento
+
         const loadingTexts = [
             'Carregando sistema de monitoramento...',
             'Verificando dados de segurança...',
             'Preparando mapa interativo...',
             'Finalizando carregamento...'
         ];
-        
-        let currentTextIndex = 0;
+
         const loadingTextElement = document.querySelector('.loading-text');
-        
-        const textInterval = setInterval(function() {
+        let currentTextIndex = 0;
+
+        const textInterval = setInterval(() => {
             currentTextIndex = (currentTextIndex + 1) % loadingTexts.length;
-            loadingTextElement.textContent = loadingTexts[currentTextIndex];
+
+            if (loadingTextElement) {
+                loadingTextElement.textContent = loadingTexts[currentTextIndex];
+            }
         }, 750);
-        
-        // Limpar intervalo quando a página for redirecionada
-        setTimeout(function() {
+
+        setTimeout(() => {
             clearInterval(textInterval);
+            redirectToMap();
         }, 3000);
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.body.addEventListener('click', redirectToMap, { once: true });
+            document.body.addEventListener('touchstart', redirectToMap, { once: true });
+        });
     </script>
 </body>
-
 </html>
-
-
-
-
